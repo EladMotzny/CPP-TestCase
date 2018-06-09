@@ -62,7 +62,7 @@ int myround(double x) {
 struct MyStruct {
 	int num;
 	MyStruct(int num): num(num) {}
-	bool operator==(const MyStruct& other) {
+	bool operator==(const MyStruct& other) const{
 		return false; // a deliberate bug
 	}
 	bool operator!=(const MyStruct& other) {
@@ -92,13 +92,13 @@ int main() {
 		// .check_output(5, "5")     // check output operator <<
 		.print();
 
-	// TestCase("Test MyStruct operators", cerr)
-	// 	.check_equal(MyStruct(5), MyStruct(5))      // Here there is a bug.
+	TestCase("Test MyStruct operators", cerr)
+		.check_equal(MyStruct(5), MyStruct(5))      // Here there is a bug.
 		// .check_different(MyStruct(5), MyStruct(6))  // Here there is no bug.
 		// .check_output(MyStruct(5), "MyStruct(5)")   // Here there is a bug. 
 		// .check_function(getNum, MyStruct(5), 5)     // Here there is a bug.
 		// .check_function([](const MyStruct& s){return s.myNum();}, MyStruct(5), 5) // Here there is a bug.
-		// .print();
+		.print();
 }
 
 /* Expected output:

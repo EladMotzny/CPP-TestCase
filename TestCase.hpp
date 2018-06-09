@@ -1,6 +1,6 @@
 using namespace std;
 #include <iostream>
-#pragma once;
+#pragma once
 #include <string>
 #include <sstream>
 
@@ -14,11 +14,13 @@ class TestCase{
             this->msg = msg;
             this->cerr <<"";
         }
-   
+
         template <typename type>
-        void check_equal(const type &t1, const type &t2) { //TestCase<type>::
-	    if(t1 != t2)
-            this->cerr << this->msg << ": Failure in test #1: " << type << " should equal " << type << "!" << endl;
+        TestCase& check_equal(const type &t1,const type &t2) { //TestCase<type>::
+            if(!(t1 == t2))
+                this->cerr << this->msg << ": Failure in test #1: " << t1 << " should equal " << t2 << "!" << endl;
+            
+            return *this;
         }
 
         void print(){this->cerr << endl;}
