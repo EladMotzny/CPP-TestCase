@@ -36,12 +36,12 @@ class TestCase{
         template <typename type>
         TestCase& check_different(const type &t1, const type &t2){
             testNum++;
-            if(!(t1==t2)){//the test is ok
+            if(t1!=t2){//the test is ok
                 pass++;//maybe this->pass
             }
             else{//test failed
                 fail++;
-                this->cerr << this->msg << ": Failure in test #" << testNum << ": "<< t1 << "should NOT be equal to " << t2 << endl;
+                this->cerr << this->msg << ": Failure in test #" << testNum << ": "<< t1 << " should differ than " << t2 << "!" << endl;
             }
             return *this;
         }
@@ -53,7 +53,7 @@ class TestCase{
             s << t1;
             if(s.str()!=st){
                 fail++;
-                this->cerr << this->msg << ": Failure in test #" << testNum << "string value should be " << s.str() << " but is "<< st << endl;
+                this->cerr << this->msg << ": Failure in test #" << testNum << ": string value should be " << st << " but is "<< s.str() << endl;
             }
             else{
                 pass++;
@@ -69,12 +69,12 @@ class TestCase{
             }
             else{
                 fail++;
-                this->cerr << this->msg << ":Failure in test #" << testNum << ": Function should return "<< t2 <<" but returned "<< func(t1) << "!" <<endl;
+                this->cerr << this->msg << ": Failure in test #" << testNum << ": Function should return "<< t2 <<" but returned "<< func(t1) << "!" <<endl;
             }
             return *this;
         }
 
 
-        void print(){this->cerr << fail<<" failed, " << pass <<" passed," << testNum <<" in total" << endl;}
+        void print(){this->cerr << this->msg <<": "<< fail<<" failed, " << pass <<" passed, " << testNum <<" total." << endl << "---" << endl;}
 
 };
